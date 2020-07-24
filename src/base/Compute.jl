@@ -66,7 +66,7 @@ function evaluate(model::PSHestonAssetPricingModelParameters, initialCondition::
     return (T,X)
 end
 
-function evaluate(model::PSSingleIndexModelParameters; factorArray::Array{Float64,2}; 
+function evaluate(model::PSSingleIndexModelParameters, factorArray::Array{Float64,1}; 
     number_of_samples::Int64 = 100)
 
     # TODO: checks ...
@@ -79,17 +79,15 @@ function evaluate(model::PSSingleIndexModelParameters; factorArray::Array{Float6
     riskFreeRate = model.riskFreeRate
     pV = [⍺ ; β]
     
-
     # initialize -
-    (number_of_steps, number_of_cols) = size(factorArray)
-    assetReturnArray = zeros(number_of_steps, 3)
+    number_of_steps = length(factorArray)
     X = zeros(number_of_steps,2)
-    Y = zeros(number_of_steps,number_of_samples)
+    Y = zeros(number_of_steps, number_of_samples)
 
     # formulate X -
     for step_index = 1:number_of_steps
         X[step_index,1] = 1.0
-        X[step_index,2] = (factorArray[step_index,2] - riskFreeRate)
+        X[step_index,2] = (factorArray[step_index,1] - riskFreeRate)
     end
 
     # formulate Y -
@@ -111,14 +109,49 @@ function evaluate(model::PSSingleIndexModelParameters; factorArray::Array{Float6
     μ = mean(Y,dims=2)
     σ = std(Y,dims=2)
 
-    # # package -
-    for step_index = 1:number_of_steps 
-        assetReturnArray[step_index,1] = factorArray[step_index,1]
-        assetReturnArray[step_index,2] = μ[step_index]
-        assetReturnArray[step_index,3] = σ[step_index]
+    # return -
+    return (Y,μ,σ)
+end
+
+function price(model::PSSingleIndexModelParameters, factorArray::Array{Float64,1}, initialPrice::Float64; 
+    number_of_samples::Int64 = 100)
+
+    # compute the returns -
+    (R,μ,σ) = evaluate(model, factorArray; number_of_samples=number_of_samples)
+
+    # compute return actual (not excess return) -
+    R_actual = R .+ model.riskFreeRate
+
+    # get the size -
+    (number_of_rows,number_of_cols) = size(R_actual)
+
+    # initialize -
+    price_array = zeros(number_of_rows, number_of_samples)
+
+    # samples -
+    for sample_index = 1:number_of_samples
+        
+        # add the initial value -
+        price_array[1,sample_index] = initialPrice
+        
+        # main loop -
+        price_value = initialPrice
+        for step_index = 2:number_of_rows
+            
+            # compute new price -
+            theta_value = R_actual[step_index-1, sample_index]
+            tmp = price_value*(1+theta_value)
+
+            # grab -
+            price_array[step_index, sample_index] = tmp
+
+            # update -
+            price_value = tmp
+        end
     end
 
-    return assetReturnArray
+    # return -
+    return price_array
 end
 
 function estimate_single_index_model(assetReturnArray::Array{Float64,1}, factorArray::Array{Float64,1}; 

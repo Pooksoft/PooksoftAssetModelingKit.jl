@@ -23,15 +23,15 @@ struct PSGeometricBrownianMotionModelParameters <: PSAbstractAssetReturnModel
     end
 end
 
-struct PSSingleIndexModelParameters
+struct PSSingleIndexModelParameters <: PSAbstractAssetReturnModel
 
     # model parameters -
     ⍺::Float64
     β::Float64
-    𝝐::ContinuousUnivariateDistribution
     riskFreeRate::Float64
+    𝝐::ContinuousUnivariateDistribution
 
-    function PSSingleIndexModelParameters(⍺=0.0, β=0.0, 𝝐, riskFreeRate=0.0)
-        this = new(⍺, β, 𝝐, riskFreeRate)
+    function PSSingleIndexModelParameters(⍺, β, riskFreeRate, 𝝐)
+        this = new(⍺, β, riskFreeRate, 𝝐)
     end
 end
