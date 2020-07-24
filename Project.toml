@@ -2,3 +2,11 @@ name = "PooksoftAssetModelingKit"
 uuid = "30c3b604-477b-4a1f-9f80-c60d6f60ac5b"
 authors = ["Jeffrey Varner <jvarner@pooksoft.com>"]
 version = "0.1.0"
+
+[deps]
+DiffEqFinancial = "5a0ffddc-d203-54b0-88ba-2c03c0fc2e67"
+DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+PookTradeBase = "a7d80504-cf70-4d3c-ae4d-49fe0971309a"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
