@@ -154,6 +154,31 @@ function price(model::PSSingleIndexModelParameters, factorArray::Array{Float64,1
     return price_array
 end
 
+function price(model::PSRandomWalkModelParameters, initialPrice::Float64, number_of_steps::Int64; number_of_samples::Int64 = 100)
+
+    # initialize -
+    computed_price_array = zeros(number_of_steps, number_of_samples)
+
+    # draw samples -
+    d_matrix = rand(model.𝝐,number_of_steps,number_of_samples)
+
+    # main loop -
+    for sample_index = 1:number_of_samples        
+        
+        # set the initial price -
+        computed_price_array[1,sample_index] = initialPrice
+        
+        # walk through time -
+        for step_index = 2:number_of_steps
+            value = computed_price_array[step_index-1,sample_index] + d_matrix[step_index,sample_index]
+            computed_price_array[step_index,sample_index] = value
+        end
+    end
+
+    # return -
+    return computed_price_array
+end
+
 function estimate_single_index_model(assetReturnArray::Array{Float64,1}, factorArray::Array{Float64,1}; 
     riskFreeRate::Float64 = 0.00169)::PSSingleIndexModelParameters
 
@@ -186,4 +211,26 @@ function estimate_single_index_model(assetReturnArray::Array{Float64,1}, factorA
 
     # return -
     return model_wrapper
+end
+
+function estimate_random_walk_model(assetPriceArray::Array{Float64,1})::PSResult
+
+    # TODO: impl checks here ..
+
+    # initialize -
+    price_delta_array = Array{Float64,1}()
+    number_of_time_steps = length(assetPriceArray)
+    
+    # compute the price difference array -
+    for time_index = 2:number_of_time_steps
+        value = assetPriceArray[time_index] - assetPriceArray[time_index-1]
+        push!(price_delta_array, value)
+    end
+
+    # fit distribution -
+    # TODO: Pass in distributon type?
+    D = fit(Laplace, price_delta_array)
+
+    # build wrapper and return -
+    return PSResult(PSRandomWalkModelParameters(D))
 end

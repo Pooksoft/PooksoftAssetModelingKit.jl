@@ -35,3 +35,13 @@ struct PSSingleIndexModelParameters <: PSAbstractAssetReturnModel
         this = new(⍺, β, riskFreeRate, 𝝐)
     end
 end
+
+struct PSRandomWalkModelParameters <: PSAbstractAssetReturnModel
+
+    # model parameters -
+    𝝐::ContinuousUnivariateDistribution
+
+    function PSRandomWalkModelParameters(𝝐)
+        this = new(𝝐)
+    end
+end
