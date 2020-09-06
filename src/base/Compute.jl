@@ -1,5 +1,5 @@
 function evaluate(model::PSGeometricBrownianMotionModelParameters, initial_condition::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
-    number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)
+    number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)::PSResult
 
     # get parameters from the model -
     μ = model.μ
@@ -36,12 +36,15 @@ function evaluate(model::PSGeometricBrownianMotionModelParameters, initial_condi
     μ = mean(X,dims=2)
     σ = std(X,dims=2)
 
+    # create a named tuple to return -
+    return_tuple = (T=T,X=X,μ=μ,σ=σ)
+
     # return -
-    return (T,X,μ,σ)
+    return PSResult(return_tuple)
 end
 
 function evaluate(model::PSHestonAssetPricingModelParameters, initialCondition::Array{Float64,1}, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
-    number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)
+    number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)::PSResult
 
     # setup the problem -
     problem = HestonProblem(model.μ, model.𝝹, model.ϴ, model.σ, model.𝜌, initialCondition, tspan)
@@ -62,8 +65,15 @@ function evaluate(model::PSHestonAssetPricingModelParameters, initialCondition::
         X[step_index] = soln_array[1]
     end
 
+    # compute the mean, and std -
+    μ = mean(X,dims=2)
+    σ = std(X,dims=2)
+
+    # create a named tuple to return -
+    return_tuple = (T=T,X=X,μ=μ,σ=σ)
+
     # return -
-    return (T,X)
+    return PSResult(return_tuple)
 end
 
 function evaluate(model::PSSingleIndexModelParameters, factorArray::Array{Float64,1}; 
