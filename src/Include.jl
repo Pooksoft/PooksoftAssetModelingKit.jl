@@ -15,3 +15,4 @@ using Reexport
 include("./base/Types.jl")
 include("./base/Compute.jl")
 include("./base/Utility.jl")
+include("./base/Factory.jl")
