@@ -6,8 +6,7 @@ function build_geometric_brownian_motion_model(μ::Float64 = 0.0,σ::Float64 = 0
     end
 
     # build -
-    μ_corrected = (μ/100.0)
-    type_object = PSGeometricBrownianMotionModelParameters(μ_corrected,σ)
+    type_object = PSGeometricBrownianMotionModelParameters(μ,σ)
 
     # return wrapped -
     return PSResult{PSGeometricBrownianMotionModelParameters}(type_object)
