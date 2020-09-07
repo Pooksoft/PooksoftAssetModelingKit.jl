@@ -14,6 +14,51 @@ function compute_linear_return_array(priceArray::Array{Float64,1})::PSResult
     return PSResult(linear_return_array)
 end
 
+function compute_linear_return_array(dataTable::DataFrame; key::Symbol = Symbol("adjusted_close"))
+
+    # initialize -
+    price_array = Float64[]
+
+    # iterate to build the price array -
+    (number_of_rows,number_of_cols) = size(dataTable)
+    for row_index = 1:number_of_rows
+        data_value = dataTable[row_index,key]
+        push!(price_array,data_value)
+    end
+
+    # return -
+    return compute_linear_return_array(price_array)
+end
+
+function compute_return_volatility(dataTable::DataFrame; key::Symbol = Symbol("adjusted_close"))::PSResult
+
+    # initialize -
+    price_array = Float64[]
+
+    # iterate to build the price array -
+    (number_of_rows,number_of_cols) = size(dataTable)
+    for row_index = 1:number_of_rows
+        data_value = dataTable[row_index,key]
+        push!(price_array,data_value)
+    end
+
+    # return -
+    return compute_return_volatility(price_array)
+end
+
+function compute_return_volatility(priceArray::Array{Float64})::PSResult
+
+    # compute the return array -
+    result = compute_linear_return_array(priceArray)
+    if (isa(result.value,Exception) == true)
+        return result
+    end
+    volatlity = std(result.value)
+
+    # return -
+    return PSResult(volatlity)
+end
+
 function extract(dataTable::DataFrame, start::Date, stop::Date; 
     timestampKey::Symbol = Symbol("timestamp"))::PSResult
 
