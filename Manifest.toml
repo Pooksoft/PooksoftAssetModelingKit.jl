@@ -566,11 +566,11 @@ git-tree-sha1 = "44d018211a56626288b5d3f8c6497d28c26dc850"
 uuid = "e409e4f3-bfea-5376-8464-e040bb5c01ab"
 version = "0.4.0"
 
-[[PookTradeBase]]
-git-tree-sha1 = "b209d3a0f1772894427ae1ae129d9c5ce1cec856"
+[[PooksoftBase]]
+git-tree-sha1 = "da2117f73bc39c5c5d1f9dce0bf880e7c1f8824f"
 repo-rev = "master"
-repo-url = "https://github.com/Pooksoft/PookTradeBase.git"
-uuid = "a7d80504-cf70-4d3c-ae4d-49fe0971309a"
+repo-url = "https://github.com/Pooksoft/PooksoftBase.jl.git"
+uuid = "17dff602-ea15-4a83-a4cd-e8c4e335a075"
 version = "0.1.0"
 
 [[PooledArrays]]

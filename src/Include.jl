@@ -9,7 +9,7 @@ using Distributions
 using Dates
 using DataFrames
 using Reexport
-@reexport using PookTradeBase
+@reexport using PooksoftBase
 
 # include my code ...
 include("./base/Types.jl")
