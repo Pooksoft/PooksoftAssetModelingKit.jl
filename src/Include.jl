@@ -1,6 +1,3 @@
-# define constants here -
-const path_to_package = dirname(pathof(@__MODULE__))
-
 # global packages -
 using DifferentialEquations
 using DiffEqFinancial
