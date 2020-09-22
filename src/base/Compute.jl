@@ -245,7 +245,7 @@ function estimate_random_walk_model(assetPriceArray::Array{Float64,1})::PSResult
     return PSResult(PSRandomWalkModelParameters(D))
 end
 
-function sample(model::PSGeometricBrownianMotionModelParameters, initialUnderlyingPrice::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
+function underlying_gbm_sample(model::PSGeometricBrownianMotionModelParameters, initialUnderlyingPrice::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
     number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)
 
     # initialize -
