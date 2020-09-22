@@ -245,7 +245,7 @@ function estimate_random_walk_model(assetPriceArray::Array{Float64,1})::PSResult
     return PSResult(PSRandomWalkModelParameters(D))
 end
 
-function underlying_gbm_sample(model::PSGeometricBrownianMotionModelParameters, initialUnderlyingPrice::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
+function sample_underlying_gbm_model(model::PSGeometricBrownianMotionModelParameters, initialUnderlyingPrice::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
     number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)
 
     # initialize -
@@ -256,6 +256,12 @@ function underlying_gbm_sample(model::PSGeometricBrownianMotionModelParameters, 
 
     # setup the random number -
     d = Normal()
+
+    # generate samples -
+    positive_array = rand(d,number_of_time_steps,number_of_trials)
+    negative_array = -1*positive_array
+    Z_sample_array = [positive_array negative_array]
+
 
     # grab stuff from the model -
     μ = model.μ
@@ -271,8 +277,11 @@ function underlying_gbm_sample(model::PSGeometricBrownianMotionModelParameters, 
     for sample_index = 1:number_of_trials
         for time_index = 1:number_of_time_steps
             
+            # grab Z value -
+            Z_value = Z_sample_array[time_index,sample_index]
+
             # compute new state -
-            soln_term = (μ - 0.5*σ^2)*Δt+σ*(sqrt(Δt))*rand(d)
+            soln_term = (μ - 0.5*σ^2)*Δt+σ*(sqrt(Δt))*Z_value
             old_state = sample_price_array[sample_index,time_index]
             new_state = old_state*exp(soln_term)
 
