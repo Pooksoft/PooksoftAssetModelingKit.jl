@@ -7,6 +7,7 @@ include("Include.jl")
 export extract
 export price
 export evaluate
+export sample
 export estimate_single_index_model
 export estimate_random_walk_model
 export compute_linear_return_array

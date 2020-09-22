@@ -244,3 +244,43 @@ function estimate_random_walk_model(assetPriceArray::Array{Float64,1})::PSResult
     # build wrapper and return -
     return PSResult(PSRandomWalkModelParameters(D))
 end
+
+function sample(model::PSGeometricBrownianMotionModelParameters, initialUnderlyingPrice::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
+    number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)
+
+    # initialize -
+    Random.seed!(123) # Setting the seed
+    time_sample_array = range(tspan[1],stop=tspan[2],step=timeStep)
+    number_of_time_steps = length(time_sample_array)
+    sample_price_array = zeros(number_of_trials, (number_of_time_steps + 1))
+
+    # setup the random number -
+    d = Normal()
+
+    # grab stuff from the model -
+    μ = model.μ
+    σ = model.σ
+    Δt = timeStep
+
+    # add the initial condition -
+    for sample_index = 1:number_of_trials
+        sample_price_array[sample_index,1] = initialUnderlyingPrice
+    end
+
+    # setup the time array -
+    for sample_index = 1:number_of_trials
+        for time_index = 1:number_of_time_steps
+            
+            # compute new state -
+            soln_term = (μ - 0.5*σ^2)*Δt+σ*(sqrt(Δt))*rand(d)
+            old_state = sample_price_array[sample_index,time_index]
+            new_state = old_state*exp(soln_term)
+
+            # cache -
+            sample_price_array[sample_index,time_index+1] = new_state
+        end
+    end
+
+    # return -
+    return PSResult(sample_price_array)
+end
