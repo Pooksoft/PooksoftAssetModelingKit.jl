@@ -252,13 +252,13 @@ function sample_underlying_gbm_model(model::PSGeometricBrownianMotionModelParame
     Random.seed!(123) # Setting the seed
     time_sample_array = range(tspan[1],stop=tspan[2],step=timeStep)
     number_of_time_steps = length(time_sample_array)
-    sample_price_array = zeros(number_of_trials, (number_of_time_steps + 1))
+    sample_price_array = zeros(2*number_of_trials, (number_of_time_steps + 1))
 
     # setup the random number -
     d = Normal()
 
     # generate samples -
-    positive_array = rand(d,number_of_time_steps,number_of_trials)
+    positive_array = rand(d,number_of_time_steps, number_of_trials)
     negative_array = -1*positive_array
     Z_sample_array = [positive_array negative_array]
 
@@ -269,12 +269,12 @@ function sample_underlying_gbm_model(model::PSGeometricBrownianMotionModelParame
     Δt = timeStep
 
     # add the initial condition -
-    for sample_index = 1:number_of_trials
+    for sample_index = 1:(2*number_of_trials)
         sample_price_array[sample_index,1] = initialUnderlyingPrice
     end
 
     # setup the time array -
-    for sample_index = 1:number_of_trials
+    for sample_index = 1:(2*number_of_trials)
         for time_index = 1:number_of_time_steps
             
             # grab Z value -
