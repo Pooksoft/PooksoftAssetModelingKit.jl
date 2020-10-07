@@ -46,6 +46,23 @@ function compute_log_return_array(priceArray::Array{Float64})::PSResult
     return PSResult(log_return_array)
 end
 
+function compute_log_return_array(dataTable::DataFrame; key::Symbol = Symbol("adjusted_close"))::PSResult
+
+    # initialize -
+    price_array = Float64[]
+
+    # iterate to build the price array -
+    (number_of_rows,number_of_cols) = size(dataTable)
+    for row_index = 1:number_of_rows
+        data_value = dataTable[row_index,key]
+        push!(price_array,data_value)
+    end
+
+    # return -
+    return compute_log_return_array(price_array)
+end
+
+
 function compute_return_volatility(dataTable::DataFrame; returnCalcFunction::Function=compute_linear_return_array,
     key::Symbol = Symbol("adjusted_close"))::PSResult
 
