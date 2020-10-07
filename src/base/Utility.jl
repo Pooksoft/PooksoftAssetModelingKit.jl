@@ -59,8 +59,18 @@ function compute_return_volatility(dataTable::DataFrame; returnCalcFunction::Fun
         push!(price_array,data_value)
     end
 
+    # we have the difference -
+    result = returnCalcFunction(price_array)
+    if (isa(result.value,Exception) == true)
+        return result
+    end
+    price_return_array = result.value
+    
+    # compute the std -
+    volatlity = std(price_return_array)
+
     # return -
-    return returnCalcFunction(price_array)
+    return PSResult(volatlity)
 end
 
 function compute_return_volatility(priceArray::Array{Float64};
