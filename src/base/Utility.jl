@@ -30,7 +30,24 @@ function compute_linear_return_array(dataTable::DataFrame; key::Symbol = Symbol(
     return compute_linear_return_array(price_array)
 end
 
-function compute_return_volatility(dataTable::DataFrame; key::Symbol = Symbol("adjusted_close"))::PSResult
+function compute_log_return_array(priceArray::Array{Float64})::PSResult
+
+    # initialize -
+    log_return_array = Array{Float64,1}()
+
+    # get the size -
+    number_of_time_steps = length(priceArray)
+    for time_index = 2:number_of_time_steps
+        value = log((priceArray[time_index]/priceArray[time_index - 1]))
+        push!(log_return_array, value)
+    end
+
+    # return -
+    return PSResult(log_return_array)
+end
+
+function compute_return_volatility(dataTable::DataFrame; returnCalcFunction::Function=compute_linear_return_array,
+    key::Symbol = Symbol("adjusted_close"))::PSResult
 
     # initialize -
     price_array = Float64[]
@@ -43,13 +60,14 @@ function compute_return_volatility(dataTable::DataFrame; key::Symbol = Symbol("a
     end
 
     # return -
-    return compute_return_volatility(price_array)
+    return returnCalcFunction(price_array)
 end
 
-function compute_return_volatility(priceArray::Array{Float64})::PSResult
+function compute_return_volatility(priceArray::Array{Float64};
+    returnCalcFunction::Function=compute_linear_return_array)::PSResult
 
     # compute the return array -
-    result = compute_linear_return_array(priceArray)
+    result = returnCalcFunction(priceArray)
     if (isa(result.value,Exception) == true)
         return result
     end

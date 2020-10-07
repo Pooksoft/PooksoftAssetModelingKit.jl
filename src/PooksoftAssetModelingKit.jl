@@ -11,6 +11,7 @@ export sample_underlying_gbm_model
 export estimate_single_index_model
 export estimate_random_walk_model
 export compute_linear_return_array
+export compute_log_return_array
 export compute_return_volatility
 
 # factory methods -
