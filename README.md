@@ -1,3 +1,5 @@
+![CI](https://github.com/Pooksoft/PooksoftAssetModelingKit.jl/workflows/CI/badge.svg)
+
 ## Introduction
 ``PooksoftAssetModelingKit.jl`` is a [Julia](https://www.julialang.org) package to model underlying equity pricing as a function of time. ``PooksoftAssetModelingKit.jl`` is a member of the [Project Serenity](http://www.pooksoft.com) collection of packages from [Pooksoft](http://www.pooksoft.com), along with [PooksoftOptionsKit.jl](https://github.com/Pooksoft/PooksoftOptionsKit.jl) and 
 [PooksoftAlphaVantageDataStore.jl](https://github.com/Pooksoft/PooksoftAlphaVantageDataStore.jl) packages. 
