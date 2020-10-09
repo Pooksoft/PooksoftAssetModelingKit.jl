@@ -39,7 +39,7 @@ and pretty much do anything you want with it. However, if you do pull the code, 
 Check out [Rob Allen's DevNotes](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/)
 for a beginner's guide to contributing to a GitHub project to get started. 
 
-## Disclaimer and risks
+### Disclaimer and risks
 ``PooksoftAssetModelingKit.jl`` is offered solely for training and  informational purposes. No offer or solicitation to buy or sell securities or securities derivative products of any kind, or any type of investment or trading advice or strategy,  is made, given or in any manner endorsed by Pooksoft. 
 
 Trading involves risk. Carefully review your financial situation before investing in securities, futures contracts, options or commodity interests. Past performance, whether actual or indicated by historical tests of strategies, is no guarantee of future performance or success. Trading is generally not appropriate for someone with limited resources, investment or trading experience, or a low-risk tolerance.  Only risk capital that will not be needed for living expenses.
