@@ -103,22 +103,3 @@ function compute_return_volatility(priceArray::Array{Float64};
     # return -
     return PSResult(volatlity)
 end
-
-function extract(dataTable::DataFrame, start::Date, stop::Date; 
-    timestampKey::Symbol = Symbol("timestamp"))::PSResult
-
-    # find index of start -
-    idx_start = findfirst(x->x==start,dataTable[!,timestampKey])
-    idx_stop = findfirst(x->x==stop,dataTable[!,timestampKey])
-
-    # are either of these indexes empty?
-    if (isempty(idx_start) == true || isempty(idx_stop) == stop)
-        return PSResult(ErrorException("Inconsistent date range"))
-    end
-
-    # extract the set -
-    Z = dataTable[min(idx_start,idx_stop):max(idx_start,idx_stop),:]    
-
-    # return -
-    return PSResult(Z)
-end

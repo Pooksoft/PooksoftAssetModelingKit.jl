@@ -4,7 +4,6 @@ module PooksoftAssetModelingKit
 include("Include.jl")
 
 # export methods -
-export extract
 export price
 export evaluate
 export sample_underlying_gbm_model
