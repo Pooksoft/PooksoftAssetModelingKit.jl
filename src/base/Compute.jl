@@ -237,13 +237,11 @@ function estimate_random_walk_model(assetPriceArray::Array{Float64,1})::PSResult
         push!(price_delta_array, value)
     end
 
-
-    # fit distribution -
-    # TODO: Pass in distributon type?
-    D = fit(Laplace, price_delta_array)
+    # build the model -
+	model = kde_lscv(price_delta_array)
 
     # build wrapper and return -
-    return PSResult(PSRandomWalkModelParameters(D))
+    return PSResult(PSRandomWalkModelParameters(model))
 end
 
 function sample_underlying_gbm_model(model::PSGeometricBrownianMotionModelParameters, initialUnderlyingPrice::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 

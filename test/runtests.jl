@@ -3,6 +3,41 @@ using CSV
 using DataFrames
 using Test
 using Statistics
+using KernelDensity
+using Dates
+
+function estimate_random_walk_model_test()
+
+    # test setup -
+    ticker_symbol = 
+    path_test_data_file = "./data/Test.csv"
+
+    # load the data file -
+    df = CSV.read(path_test_data_file,DataFrame)
+
+    # what dates are we going to look at?
+	date_start = Date("2016-01-04")
+    date_stop = Date("2020-10-09")
+    
+    # filter the date range we want -
+	tmp = filter(r->(r.timestamp >= date_start && r.timestamp <= date_stop),df)
+
+    # compute the difference for each ticker -
+	result = compute_linear_return_array(tmp)
+	if (isa(result.value, Exception) == true)
+		return false
+	end
+    price_return_array = result.value
+    
+    # grab the model - is this the right type?
+	model = kde_lscv(price_return_array)
+    if (isa(model, UnivariateKDE) == false)
+        return false
+    end
+
+    # we got here - all is ok
+    return true
+end
 
 function run_gbm_model_simulation()
 
@@ -58,4 +93,5 @@ end
 
 @testset "asset_modeling_test_set" begin
     @test run_gbm_model_simulation() == true
+    @test estimate_random_walk_model_test() == true
 end
