@@ -39,9 +39,9 @@ end
 struct PSRandomWalkModelParameters <: PSAbstractAssetReturnModel
 
     # model parameters -
-    𝝐::ContinuousUnivariateDistribution
+    𝝙::UnivariateKDE
 
-    function PSRandomWalkModelParameters(𝝐)
-        this = new(𝝐)
+    function PSRandomWalkModelParameters(𝝙::UnivariateKDE)
+        this = new(𝝙)
     end
 end
