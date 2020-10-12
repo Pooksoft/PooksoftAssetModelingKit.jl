@@ -237,6 +237,7 @@ function estimate_random_walk_model(assetPriceArray::Array{Float64,1})::PSResult
         push!(price_delta_array, value)
     end
 
+
     # fit distribution -
     # TODO: Pass in distributon type?
     D = fit(Laplace, price_delta_array)

@@ -3,6 +3,7 @@ using DifferentialEquations
 using DiffEqFinancial
 using Statistics
 using Distributions
+using KernelDensity
 using Random
 using Dates
 using DataFrames
