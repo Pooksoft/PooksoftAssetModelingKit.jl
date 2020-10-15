@@ -15,6 +15,7 @@ export compute_return_volatility
 
 # technical indicators methods -
 export compute_fibonacci_retracement_levels
+export compute_exponential_moving_average
 
 # factory methods -
 export build_geometric_brownian_motion_model
