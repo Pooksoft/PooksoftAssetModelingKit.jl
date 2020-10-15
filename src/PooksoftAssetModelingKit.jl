@@ -13,6 +13,9 @@ export compute_linear_return_array
 export compute_log_return_array
 export compute_return_volatility
 
+# technical indicators methods -
+export compute_fibonacci_retracement_levels
+
 # factory methods -
 export build_geometric_brownian_motion_model
 
