@@ -63,7 +63,7 @@ function compute_fibonacci_retracement_levels(data::DataFrame;
 
     # find the min and the max in the data being passed in -
     min_value = minimum(data[!,dataColKeySymbol])
-    max_value = maximim(data[!,dataColKeySymbol])
+    max_value = maximum(data[!,dataColKeySymbol])
     𝝙 = max_value - min_value
 
     # compute the levels -
