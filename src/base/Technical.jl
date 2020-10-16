@@ -58,7 +58,7 @@ function compute_fibonacci_retracement_levels(data::DataFrame;
     # todo: check - does the data frame contain the dataColKeySymbol?
 
     # initialize -
-    fnrl_array = zeros(6,2)
+    fnrl_array = zeros(7,2)
     fn_array = [0.0 0.236 0.382 0.5 0.618 0.786 1.0];
 
     # find the min and the max in the data being passed in -
