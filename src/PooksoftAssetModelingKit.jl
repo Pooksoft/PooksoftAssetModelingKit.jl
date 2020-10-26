@@ -13,6 +13,9 @@ export compute_linear_return_array
 export compute_log_return_array
 export compute_return_volatility
 
+# lattice -
+export ternary_price_tree
+
 # technical indicators methods -
 export compute_fibonacci_retracement_levels
 export compute_exponential_moving_average
