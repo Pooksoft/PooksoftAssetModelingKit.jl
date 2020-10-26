@@ -30,14 +30,24 @@ function ternary_price_tree(initialPrice::Float64, treeHeight::Int64, deltaFunct
         downValue = d*basePrice
 
         # set my kids -
-        leftIndex = 3*node_index - 1
-        midIndex = 3*node_index
-        rightIndex = 3*node_index + 1
 
-        # set the prices -
-        priceTree[leftIndex] = upValue
-        priceTree[midIndex] = midValue
-        priceTree[rightIndex] = downValue
+        # left -
+        leftIndex = 3*node_index - 1
+        if (leftIndex<=number_of_nodes)
+            priceTree[leftIndex] = upValue
+        end
+
+        # mid -
+        midIndex = 3*node_index
+        if (midIndex<=number_of_nodes)
+            priceTree[midIndex] = midValue
+        end
+
+        # right 
+        rightIndex = 3*node_index + 1
+        if (rightIndex<=number_of_nodes)
+            priceTree[rightIndex] = downValue
+        end
     end
 
     # return -
