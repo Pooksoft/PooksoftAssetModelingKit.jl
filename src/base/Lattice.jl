@@ -7,7 +7,7 @@ function ternary_price_tree(initialPrice::Float64, treeHeight::Int64, deltaFunct
     # TODO: check - are the args legit?
 
     # initialize -
-    number_of_nodes = (3^(treeHeight+1) - 1)/2
+    number_of_nodes = Int((3^(treeHeight+1) - 1)/2)
     priceTree::Array{Float64,1}(undef,number_of_nodes)
 
     # set the current price -
