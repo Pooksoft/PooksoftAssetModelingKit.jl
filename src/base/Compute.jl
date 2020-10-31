@@ -244,6 +244,11 @@ function estimate_random_walk_model(assetPriceArray::Array{Float64,1})::PSResult
     return PSResult(PSRandomWalkModelParameters(model))
 end
 
+"""
+    sample_underlying_gbm_model
+
+Stuff will go here. Awesome stuff, the most beautiful stuff.
+"""
 function sample_underlying_gbm_model(model::PSGeometricBrownianMotionModelParameters, initialUnderlyingPrice::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
     number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)
 
