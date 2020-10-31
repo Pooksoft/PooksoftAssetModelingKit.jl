@@ -9,6 +9,7 @@ makedocs(sitename="PooksoftAssetModelingKit.jl",
         "Stochastic models" => [
             "stochastic.md"
         ],
+        
         "Lattice models" => [
             "lattice.md"
         ]
