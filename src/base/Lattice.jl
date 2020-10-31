@@ -2,6 +2,14 @@
 # ----------------------------------------------------------------------------------------------------------------------- #
 
 # -- PUBLIC METHODS ----------------------------------------------------------------------------------------------------- #
+
+"""
+    compute_binary_price_tree(initialPrice::Float64, treeHeight::Int64, deltaFunction::Function)
+
+``\\frac{n!}{k!(n - k)!} = \\binom{n}{k}``
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function compute_binary_price_tree(initialPrice::Float64, treeHeight::Int64, deltaFunction::Function)::PSResult
 
     # TODO: check - are the args legit?
@@ -43,6 +51,11 @@ function compute_binary_price_tree(initialPrice::Float64, treeHeight::Int64, del
     return PSResult{Array{Float64,1}}(priceTree)
 end
 
+"""
+    compute_ternary_price_tree(initialPrice::Float64, treeHeight::Int64, deltaFunction::Function)
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function compute_ternary_price_tree(initialPrice::Float64, treeHeight::Int64, deltaFunction::Function)::PSResult
 
     # TODO: check - are the args legit?
