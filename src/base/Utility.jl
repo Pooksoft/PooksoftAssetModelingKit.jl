@@ -1,3 +1,8 @@
+"""
+    compute_linear_return_array(priceArray::Array{Float64,1})
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function compute_linear_return_array(priceArray::Array{Float64,1})::PSResult
 
     # initialize -
@@ -14,6 +19,11 @@ function compute_linear_return_array(priceArray::Array{Float64,1})::PSResult
     return PSResult(linear_return_array)
 end
 
+"""
+    compute_linear_return_array(dataTable::DataFrame; key::Symbol = Symbol("adjusted_close"))
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function compute_linear_return_array(dataTable::DataFrame; key::Symbol = Symbol("adjusted_close"))
 
     # initialize -
@@ -30,6 +40,11 @@ function compute_linear_return_array(dataTable::DataFrame; key::Symbol = Symbol(
     return compute_linear_return_array(price_array)
 end
 
+"""
+    compute_log_return_array(priceArray::Array{Float64})
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function compute_log_return_array(priceArray::Array{Float64})::PSResult
 
     # initialize -
@@ -46,6 +61,11 @@ function compute_log_return_array(priceArray::Array{Float64})::PSResult
     return PSResult(log_return_array)
 end
 
+"""
+    compute_log_return_array(dataTable::DataFrame; key::Symbol = Symbol("adjusted_close"))
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function compute_log_return_array(dataTable::DataFrame; key::Symbol = Symbol("adjusted_close"))::PSResult
 
     # initialize -
@@ -62,7 +82,12 @@ function compute_log_return_array(dataTable::DataFrame; key::Symbol = Symbol("ad
     return compute_log_return_array(price_array)
 end
 
+"""
+    compute_return_volatility(dataTable::DataFrame; returnCalcFunction::Function=compute_linear_return_array,
+        key::Symbol = Symbol("adjusted_close"))
 
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function compute_return_volatility(dataTable::DataFrame; returnCalcFunction::Function=compute_linear_return_array,
     key::Symbol = Symbol("adjusted_close"))::PSResult
 
@@ -90,6 +115,12 @@ function compute_return_volatility(dataTable::DataFrame; returnCalcFunction::Fun
     return PSResult(volatlity)
 end
 
+"""
+    compute_return_volatility(priceArray::Array{Float64};
+        returnCalcFunction::Function=compute_linear_return_array)
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function compute_return_volatility(priceArray::Array{Float64};
     returnCalcFunction::Function=compute_linear_return_array)::PSResult
 

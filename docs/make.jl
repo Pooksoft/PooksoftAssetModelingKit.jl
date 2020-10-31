@@ -6,12 +6,18 @@ makedocs(sitename="PooksoftAssetModelingKit.jl",
     pages = [
         "index.md",
         "Quick Start" => "quick.md",
-        "Stochastic models" => [
-            "stochastic.md"
+        "Data" => [
+            "data.md"
         ],
         
+        "Stochastic models" => [
+            "monte-carlo-gbm.md",
+            "sde.md"
+        ],
+
         "Lattice models" => [
-            "lattice.md"
+            "binomial.md",
+            "ternary.md"
         ]
     ]
 )
