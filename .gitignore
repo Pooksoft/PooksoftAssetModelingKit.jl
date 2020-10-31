@@ -1,4 +1,7 @@
 .DS_Store
 test/.DS_Store
 test/data/.DS_Store
-docs/build/
+
+# When everything is registered, we can undocument this and use the normal deploy
+# methods, but for now - we are going to do this old school
+# docs/build/
