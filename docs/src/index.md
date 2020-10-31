@@ -1,3 +1,2 @@
-```@docs
-sample_underlying_gbm_model
-```
+## Introduction
+Description of the package goes here

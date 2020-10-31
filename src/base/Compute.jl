@@ -1,3 +1,8 @@
+"""
+    evaulate(model::PSGeometricBrownianMotionModelParameters)
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function evaluate(model::PSGeometricBrownianMotionModelParameters, initial_condition::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
     number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)::PSResult
 
@@ -43,6 +48,11 @@ function evaluate(model::PSGeometricBrownianMotionModelParameters, initial_condi
     return PSResult(return_tuple)
 end
 
+"""
+    evaulate(model::PSHestonAssetPricingModelParameters)
+
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
+"""
 function evaluate(model::PSHestonAssetPricingModelParameters, initialCondition::Array{Float64,1}, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
     number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)::PSResult
 
@@ -247,7 +257,7 @@ end
 """
     sample_underlying_gbm_model
 
-Stuff will go here. Awesome stuff, the most beautiful stuff.
+Stuff will go here. Awesome stuff, the most beautiful stuff ever.
 """
 function sample_underlying_gbm_model(model::PSGeometricBrownianMotionModelParameters, initialUnderlyingPrice::Float64, tspan::Tuple{Float64,Float64}, timeStep::Float64; 
     number_of_trials::Int64=10000, return_time_step::Float64 = 1.0)
