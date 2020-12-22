@@ -14,9 +14,31 @@ Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 Interpolations = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
 KernelDensity = "5ab0869b-81aa-558d-bb23-cbf5423bbe9b"
 PooksoftBase = "17dff602-ea15-4a83-a4cd-e8c4e335a075"
-PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
 Query = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+# packages that are being called ...
+# using DifferentialEquations
+# using DiffEqFinancial
+# using Statistics
+# using Distributions
+# using KernelDensity
+# using Random
+# using Dates
+# using DataFrames
+# using Reexport
+
+[compat]
+julia = "~1.5"
+CSV = "^0.8.2"
+DataFrames = "^0.22.2"
+Documenter =  "^0.26.1"
+HTTP = "^0.9.1"
+JSON = "^0.21.1"
+PooksoftBase = "1.0.0"
+Reexport = "^0.2.0"
+DifferentialEquations = "^6.15.0"
+KernelDensity = "^0.6.2"
