@@ -14,6 +14,7 @@ using Reexport
 include("./base/Types.jl")
 include("./base/Compute.jl")
 include("./base/Utility.jl")
+include("./base/Return.jl")
 include("./base/Factory.jl")
 include("./base/Technical.jl")
 include("./base/Lattice.jl")

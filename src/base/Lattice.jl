@@ -15,40 +15,45 @@ function compute_binary_price_tree(initialPrice::Float64, treeHeight::Int64, del
     # TODO: check - are the args legit?
 
     # initialize -
-    number_of_nodes = Int(2^(treeHeight+1) - 1)
-    priceTree = Array{Float64,1}(undef,number_of_nodes)
+    number_of_nodes = Int(2^(treeHeight + 1) - 1)
+    priceTree = Array{Float64,1}(undef, number_of_nodes)
 
-    # set the current price -
-    priceTree[1] = initialPrice
+    try
 
-    # main loop -
-    for node_index = 1:number_of_nodes
-        
-        # for this node, what are the delta values?
-        (u,d) = deltaFunction(treeHeight)
+        # set the current price -
+        priceTree[1] = initialPrice
 
-        # what is the current price -
-        basePrice = priceTree[node_index]
+        # main loop -
+        for node_index = 1:number_of_nodes
+            
+            # for this node, what are the delta values?
+            (u, d) = deltaFunction(treeHeight)
 
-        # build my kid's prices -
-        upValue = u*basePrice
-        downValue = d*basePrice
+            # what is the current price -
+            basePrice = priceTree[node_index]
 
-        # left -
-        leftIndex = 2*node_index
-        if (leftIndex<=number_of_nodes)
-            priceTree[leftIndex] = upValue
+            # build my kid's prices -
+            upValue = u * basePrice
+            downValue = d * basePrice
+
+            # left -
+            leftIndex = 2 * node_index
+            if (leftIndex <= number_of_nodes)
+                priceTree[leftIndex] = upValue
+            end
+
+            # right 
+            rightIndex = 2 * node_index + 1
+            if (rightIndex <= number_of_nodes)
+                priceTree[rightIndex] = downValue
+            end
         end
 
-        # right 
-        rightIndex = 2*node_index + 1
-        if (rightIndex<=number_of_nodes)
-            priceTree[rightIndex] = downValue
-        end
+        # return -
+        return PSResult{Array{Float64,1}}(priceTree)
+    catch error
+        return PSResult(error)
     end
-
-    # return -
-    return PSResult{Array{Float64,1}}(priceTree)
 end
 
 """
@@ -61,50 +66,55 @@ function compute_ternary_price_tree(initialPrice::Float64, treeHeight::Int64, de
     # TODO: check - are the args legit?
 
     # initialize -
-    number_of_nodes = Int((3^(treeHeight+1) - 1)/2)
-    priceTree = Array{Float64,1}(undef,number_of_nodes)
+    number_of_nodes = Int((3^(treeHeight + 1) - 1) / 2)
+    priceTree = Array{Float64,1}(undef, number_of_nodes)
 
-    # set the current price -
-    priceTree[1] = initialPrice
+    try
 
-    # main loop -
-    for node_index = 1:number_of_nodes
-        
-        # for this node, what are the delta values?
-        (u,m,d) = deltaFunction(treeHeight)
+        # set the current price -
+        priceTree[1] = initialPrice
 
-        # TODO: check, is the u,m,d values ok ...?
+        # main loop -
+        for node_index = 1:number_of_nodes
+            
+            # for this node, what are the delta values?
+            (u, m, d) = deltaFunction(treeHeight)
 
-        # what is the current price -
-        basePrice = priceTree[node_index]
+            # TODO: check, is the u,m,d values ok ...?
 
-        # build my kid's prices -
-        upValue = u*basePrice
-        midValue = m*basePrice
-        downValue = d*basePrice
+            # what is the current price -
+            basePrice = priceTree[node_index]
 
-        # set my kids -
+            # build my kid's prices -
+            upValue = u * basePrice
+            midValue = m * basePrice
+            downValue = d * basePrice
 
-        # left -
-        leftIndex = 3*node_index - 1
-        if (leftIndex<=number_of_nodes)
-            priceTree[leftIndex] = upValue
+            # set my kids -
+
+            # left -
+            leftIndex = 3 * node_index - 1
+            if (leftIndex <= number_of_nodes)
+                priceTree[leftIndex] = upValue
+            end
+
+            # mid -
+            midIndex = 3 * node_index
+            if (midIndex <= number_of_nodes)
+                priceTree[midIndex] = midValue
+            end
+
+            # right 
+            rightIndex = 3 * node_index + 1
+            if (rightIndex <= number_of_nodes)
+                priceTree[rightIndex] = downValue
+            end
         end
 
-        # mid -
-        midIndex = 3*node_index
-        if (midIndex<=number_of_nodes)
-            priceTree[midIndex] = midValue
-        end
-
-        # right 
-        rightIndex = 3*node_index + 1
-        if (rightIndex<=number_of_nodes)
-            priceTree[rightIndex] = downValue
-        end
+        # return -
+        return PSResult{Array{Float64,1}}(priceTree)
+    catch error
+        return PSResult(error)
     end
-
-    # return -
-    return PSResult{Array{Float64,1}}(priceTree)
 end
 # ----------------------------------------------------------------------------------------------------------------------- #
